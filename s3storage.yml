@@ -1,0 +1,19 @@
+---
+- host: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+    - awscreds.yml
+  vars:
+    bucketname: logsbuckets
+  tasks:
+    - name:put logs to s3 buckets
+    s3:
+     aws_access_key: "{{access_key}}"
+     aws_secret_key: "{{secret_key}}"
+     bucket: "{{bucket_name}}"
+     object: logs
+     src: /var/logs
+     mode: put
+...
+
